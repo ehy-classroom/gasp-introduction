@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP Keyframes Beispiel</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+  <div class="stage">
+    <div class="floor"></div>
+    <div class="ball"></div>
+  </div>
+  <script>
+    // Initiale Einstellungen
+    gsap.set(".ball", { y: 0, scaleX: 1, scaleY: 1 });
+
+    // Animation mit Keyframes, relativ zur Gesamtdauer
+    gsap.to(".ball", {
+      duration: 3,
+      keyframes: {
+        "0%":   { y: 0, scaleX: 1,   scaleY: 1 },
+        "50%":  { y: 100, scaleX: 1.2, scaleY: 0.8 },
+        "100%": { y: 0, scaleX: 1,   scaleY: 1 }
+      },
+      ease: "none",
+      repeat: -1
+    });
+  </script>
+</body>
+</html>

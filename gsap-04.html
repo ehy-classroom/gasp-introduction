@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP Easing</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+
+        .ball {
+            left: 20px;
+            top: 120px;
+        }
+
+        .controls button {
+            padding: 0.5em 1em;
+            margin: 0.5em;
+            font-size: 0.9em;
+            cursor: pointer;
+            border: none;
+            border-radius: 0.5em;
+            background-color: hsl(0, 0%, 80%);
+            transition: background-color 0.3s;
+        }
+
+        .controls button.active {
+            background-color: hsl(199, 70%, 50%);
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <p><a href="index.html">Zurück zur Übersicht</a></p>
+        <h1>GSAP Easing</h1>
+    </header>
+
+    <section>
+        <div class="container">
+
+            <div class="stage">
+
+                <div class="ball"></div>
+
+            </div>
+            <div class="controls">
+                <button data-ease="none">Linear</button>
+                <button data-ease="power1.in">Ease In</button>
+                <button data-ease="power1.out">Ease Out</button>
+                <button data-ease="power1.inOut">Ease InOut</button>
+                <button data-ease="bounce.out">Bounce</button>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // GSAP-Animation: Ball bewegt sich von links nach rechts und zurück in einer Endlosschleife
+        let ballAnimation = gsap.to(".ball", {
+            duration: 4, // Dauer der Animation in Sekunden
+            keyframes: [
+                { left: "20px" }, // Startposition
+                { left: "420px" }, // Endposition
+                { left: "20px" } // Zurück zur Startposition
+            ],
+            repeat: -1, // Endlosschleife
+            ease: "none" // Standardmäßig lineare Bewegung
+        });
+
+        // Funktion zum Aktualisieren des aktiven Buttons
+        const updateActiveButton = (newEase) => {
+            document.querySelectorAll(".controls button").forEach(button => {
+                if (button.getAttribute("data-ease") === newEase) {
+                    button.classList.add("active");
+                } else {
+                    button.classList.remove("active");
+                }
+            });
+        };
+
+        // Event-Listener für die Buttons
+        document.querySelectorAll(".controls button").forEach(button => {
+            button.addEventListener("click", () => {
+                const newEase = button.getAttribute("data-ease"); // Easing-Wert aus dem Button-Attribut
+                ballAnimation.kill(); // Beendet die aktuelle Animation
+                ballAnimation = gsap.to(".ball", {
+                    duration: 2, // Dauer der Animation in Sekunden
+                    keyframes: [
+                        { left: "20px" }, // Startposition
+                        { left: "420px" }, // Endposition
+                        { left: "20px" } // Zurück zur Startposition
+                    ],
+                    repeat: -1, // Endlosschleife
+                    ease: newEase // Neuer Easing-Wert
+                });
+                updateActiveButton(newEase); // Aktiven Button visuell hervorheben
+            });
+        });
+
+        // Standardmäßig den "Linear"-Button aktivieren
+        updateActiveButton("none");
+    </script>
+</body>
+
+</html>

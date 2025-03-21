@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP Timeline: Bouncing Ball</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+  <header>
+    <p><a href="index.html">Zurück zur Übersicht</a></p>
+    <h1>GSAP Timeline Beispiel</h1>
+  </header>
+  <div class="stage">
+    <div class="floor"></div>
+    <div class="ball"></div>
+  </div>
+  <script>
+    // Initiale Einstellungen
+    gsap.set(".ball", { y: 0, scaleX: 1, scaleY: 1 });
+
+    // Erstelle eine Timeline
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.01 });
+
+    // Verwende Labels, um die Animation zu strukturieren
+    tl.addLabel("squashStart")
+      // Anticipation: Ball wird vorbereitet (Squash)
+      .to(".ball", { duration: 0.2, scaleX: 1, scaleY: 1, ease: "power1.out" }, "squashStart")
+      
+      // Aufprall: Ball fällt nach unten (Squash-Effekt)
+      .to(".ball", { duration: 0.5, y: 100, ease: "power2.in" }, "squashStart")
+      
+      // Stretch: Ball springt wieder nach oben (Stretch-Effekt)
+      .to(".ball", { duration: 0.5, y: 0, scaleX: 0.8, scaleY: 1.2, ease: "power2.out" }, ">")
+      
+      // Rückkehr zur Normalform
+      .to(".ball", { duration: 0.2, scaleX: 1, scaleY: 1, ease: "power2.out" }, ">");
+      
+    // Zusätzliche Steuerungsmöglichkeiten:
+    // tl.pause();         // Animation anhalten
+    // tl.reverse();       // Animation umkehren
+    // tl.timeScale(2);    // Animation doppelt so schnell ablaufen lassen
+  </script>
+</body>
+</html>

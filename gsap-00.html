@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GSAP Showcase Animationen</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body class="examples">
+  <h1>GSAP Showcase Animationen</h1>
+  
+  <!-- Stage 1: Bouncing Ball -->
+  <section>
+    <div class="container">
+      <div class="stage">
+        <div class="ball1"></div>
+      </div>
+    </div>
+    <style>
+      .ball1 {
+        position: absolute;
+        bottom: 20px;
+        width: 40px;
+        height: 40px;
+        background: red;
+        border-radius: 50%;
+        transform-origin: center bottom;
+      }
+    </style>
+    <script>
+      gsap.set(".ball1", { y: 0, scaleX: 1, scaleY: 1 });
+      gsap.timeline({ repeat: -1, repeatDelay: 0.5 })
+        .to(".ball1", { duration: 0.5, y: 100, scaleX: 1.2, scaleY: 0.8, ease: "power2.in" })
+        .to(".ball1", { duration: 0.5, y: 0, scaleX: 0.8, scaleY: 1.2, ease: "power2.out" })
+        .to(".ball1", { duration: 0.2, scaleX: 1, scaleY: 1, ease: "power2.out" });
+    </script>
+  </section>
+
+  <!-- Stage 2: Rotating Square -->
+  <section>
+    <div class="container">
+      <div class="stage">
+        <div class="square"></div>
+      </div>
+    </div>
+    <style>
+      .square {
+        width: 60px;
+        height: 60px;
+        background: royalblue;
+      }
+    </style>
+    <script>
+      gsap.to(".square", { duration: 2, rotation: 360, repeat: -1, ease: "linear" });
+    </script>
+  </section>
+
+  <!-- Stage 3: Fading Text -->
+  <section>
+    <div class="container">
+      <div class="stage">
+        <div class="text">GSAP rockt!</div>
+      </div>
+    </div>
+    <style>
+      .text {
+        font-size: 2rem;
+        font-weight: bold;
+        color: darkgreen;
+        opacity: 0;
+      }
+    </style>
+    <script>
+      gsap.timeline({ repeat: -1, yoyo: true })
+        .to(".text", { duration: 1, opacity: 1, scale: 1.2, ease: "power1.inOut" })
+        .to(".text", { duration: 1, opacity: 0, scale: 1, ease: "power1.inOut" });
+    </script>
+  </section>
+
+  <!-- Stage 4: Sliding Panel -->
+  <section>
+    <div class="container">
+      <div class="stage">
+        <div class="panel">Slide In</div>
+      </div>
+    </div>
+    <style>
+      .panel {
+        position: absolute;
+        left: -200px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 200px;
+        height: 100px;
+        background: orange;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+    </style>
+    <script>
+      gsap.to(".panel", { duration: 2, x: 680, repeat: -1, ease: "power1.inOut" });
+    </script>
+  </section>
+
+  <!-- Stage 5: Orbiting Planet -->
+  <section>
+    <div class="container">
+      <div class="stage">
+        <div class="orbit">
+          <div class="planet"></div>
+        </div>
+      </div>
+    </div>
+    <style>
+      .orbit {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border: 2px dashed #aaa;
+        border-radius: 50%;
+      }
+      .planet {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: yellow;
+        border-radius: 50%;
+        top: 50%;
+        left: 100%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    <script>
+      gsap.to(".orbit", { duration: 4, rotation: 360, repeat: -1, ease: "none" });
+    </script>
+  </section>
+</body>
+</html>

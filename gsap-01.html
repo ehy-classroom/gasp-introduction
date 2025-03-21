@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSAP X</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <p><a href="index.html">Zurück zur Übersicht</a></p>
+        <h1>GSAP X: Titel</h1>
+    </header>
+    <div class="stage">
+        <div class="floor"></div>
+        <div class="ball"></div>
+    </div>
+    <script>
+        // GSAP-Animation für den Bouncing Ball mit Squash & Stretch
+        gsap.set(".ball", { y: -100, scaleX: 1, scaleY: 1 }); // Initiale Position und Skalierung
+
+        gsap.timeline({ repeat: -1, repeatDelay: 0 })
+            .to(".ball", {
+                duration: 1.5,
+                y: 100, // Ball fällt nach unten
+                scaleX: 1.2, // Breiter beim Aufprall
+                scaleY: 0.8, // Flacher beim Aufprall
+                ease: "power2.in"
+            })
+            .to(".ball", {
+                duration: 0.5,
+                y: 100, // Ball springt nach oben
+                scaleX: 0.8, // Schmaler beim Strecken
+                scaleY: 1.2, // Länger beim Strecken
+                ease: "power2.out"
+            })
+            .to(".ball", {
+                duration: 0.2,
+                scaleX: 1, // Zurück zur normalen Breite
+                scaleY: 1, // Zurück zur normalen Höhe
+                ease: "power2.out"
+            });
+    </script>
+</body>
+
+</html>
